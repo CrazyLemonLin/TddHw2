@@ -25,7 +25,7 @@ namespace HarryPotterShoppingCartTest
             };
             var expected = 100;
             //act
-            int result = target.CheckOut(shoppingList);
+            var result = target.CheckOut(shoppingList);
 
             //assert
             result.Should().Be(expected);
@@ -52,7 +52,7 @@ namespace HarryPotterShoppingCartTest
             };
             var expected = 190;
             //act
-            int result = target.CheckOut(shoppingList);
+            var result = target.CheckOut(shoppingList);
 
             //assert
             result.Should().Be(expected);

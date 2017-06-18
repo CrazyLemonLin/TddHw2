@@ -8,9 +8,17 @@ namespace HarryPotterShoppingCart
 {
     public class HarryPotterShoppingCartService
     {
-        public int CheckOut(List<FantasyNovel> shoppingList)
+        public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
-            return 100;
+            var total = shoppingList.Sum(s => s.UnitPrice);
+            decimal result = 0 ;
+
+            if (shoppingList.Count >=2)
+            {
+                return total *0.95m;
+            }
+
+            return total;
         }
     }
 }
