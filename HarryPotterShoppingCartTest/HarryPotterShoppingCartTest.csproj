@@ -69,6 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HarryPotterShoppingCart\HarryPotterShoppingCart.csproj">
+      <Project>{D4E1B747-57D6-4E01-8955-A1F1F3AB079F}</Project>
+      <Name>HarryPotterShoppingCart</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

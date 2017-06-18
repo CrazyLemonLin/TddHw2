@@ -8,5 +8,9 @@ namespace HarryPotterShoppingCart
 {
     public class HarryPotterShoppingCartService
     {
+        public int CheckOut(List<FantasyNovel> shoppingList)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
