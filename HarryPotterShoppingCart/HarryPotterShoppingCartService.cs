@@ -8,6 +8,17 @@ namespace HarryPotterShoppingCart
 {
     public class HarryPotterShoppingCartService
     {
+        private readonly Dictionary<int, decimal> _discountRules;
+
+        public HarryPotterShoppingCartService()
+        {
+            _discountRules = new Dictionary<int, decimal> {
+                {1,1 },
+                {2,0.95m },
+                {3,0.9m },
+                {4,0.8m }
+            };
+        }
         public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
             var total = shoppingList.Sum(s => s.UnitPrice);
@@ -17,22 +28,12 @@ namespace HarryPotterShoppingCart
             return CheckOutImpl(total, count);
         }
 
-        private static decimal CheckOutImpl(int total, int count)
+        private decimal CheckOutImpl(int total, int count)
         {
-            if (count >= 4)
-            {
-                return total * 0.8m;
-            }
-            else if (count >= 3)
-            {
-                return total * 0.9m;
-            }
-            else if (count >= 2)
-            {
-                return total * 0.95m;
-            }
+            decimal discountRate;
+            _discountRules.TryGetValue(count, out discountRate);
 
-            return total;
+            return total * discountRate;
         }
     }
 }
