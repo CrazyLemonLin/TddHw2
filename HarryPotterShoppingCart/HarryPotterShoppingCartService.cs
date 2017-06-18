@@ -11,9 +11,14 @@ namespace HarryPotterShoppingCart
         public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
             var total = shoppingList.Sum(s => s.UnitPrice);
-            decimal result = 0;
-            var count = shoppingList.Count;
 
+            var count = shoppingList.Distinct().Count();
+
+            return CheckOutImpl(total, count);
+        }
+
+        private static decimal CheckOutImpl(int total, int count)
+        {
             if (count >= 3)
             {
                 return total * 0.9m;
