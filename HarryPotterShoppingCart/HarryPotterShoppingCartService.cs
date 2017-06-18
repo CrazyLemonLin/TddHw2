@@ -19,7 +19,11 @@ namespace HarryPotterShoppingCart
 
         private static decimal CheckOutImpl(int total, int count)
         {
-            if (count >= 3)
+            if (count >= 4)
+            {
+                return total * 0.8m;
+            }
+            else if (count >= 3)
             {
                 return total * 0.9m;
             }
