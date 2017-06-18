@@ -125,6 +125,23 @@ namespace HarryPotterShoppingCartTest
             result.Should().Be(expected);
         }
 
+        [Test]
+        public void CheckOutTest_買兩套_結帳價格應為750()
+        {
+            //arrange
+            var shoppingList = new List<FantasyNovel> {
+                 GetNovel(1),   GetNovel(2),   GetNovel(3), GetNovel(4), GetNovel(5),
+                  GetNovel(1),   GetNovel(2),   GetNovel(3), GetNovel(4), GetNovel(5)
+            };
+            var expected = 750;
+
+            //act
+            var result = _target.CheckOut(shoppingList);
+
+            //assert
+            result.Should().Be(expected);
+        }
+
         private FantasyNovel GetNovel(int id)
         {
             return new FantasyNovel
