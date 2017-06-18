@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
-using FluentAssertions;
+﻿using FluentAssertions;
 using HarryPotterShoppingCart;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace HarryPotterShoppingCartTest

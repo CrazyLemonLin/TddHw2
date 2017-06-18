@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HarryPotterShoppingCart
 {
@@ -20,6 +17,7 @@ namespace HarryPotterShoppingCart
                 {5,0.75m }
             };
         }
+
         public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
             //複製一個副本出來
