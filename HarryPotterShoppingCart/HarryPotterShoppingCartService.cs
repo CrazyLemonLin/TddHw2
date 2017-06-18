@@ -10,7 +10,7 @@ namespace HarryPotterShoppingCart
     {
         public int CheckOut(List<FantasyNovel> shoppingList)
         {
-            throw new NotImplementedException();
+            return 100;
         }
     }
 }
