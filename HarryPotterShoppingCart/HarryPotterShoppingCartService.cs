@@ -22,21 +22,31 @@ namespace HarryPotterShoppingCart
         }
         public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
+            //複製一個副本出來
             var shoppingListCopy = shoppingList.Select(s => s).ToList();
+            return CheckOutImpl(shoppingListCopy);
+        }
+
+        private decimal CheckOutImpl(List<FantasyNovel> shoppingListCopy)
+        {
             var total = 0m;
             while (shoppingListCopy.Any())
             {
+                //群組後取第一個
                 var distinctShoppingList = shoppingListCopy.GroupBy(s => s.Id).Select(g => g.First());
                 var distinctCount = distinctShoppingList.Count();
                 var distinctTotal = distinctShoppingList.Sum(d => d.UnitPrice);
-                total += CheckOutImpl(distinctTotal, distinctCount);
+
+                total += CalculateTotal(distinctTotal, distinctCount);
+
+                //將已取出的由副本移掉等一下才不會重複取到
                 shoppingListCopy.RemoveAll(sc => distinctShoppingList.Contains(sc));
             }
 
             return total;
         }
 
-        private decimal CheckOutImpl(int total, int count)
+        private decimal CalculateTotal(int total, int count)
         {
             decimal discountRate;
             _discountRules.TryGetValue(count, out discountRate);
