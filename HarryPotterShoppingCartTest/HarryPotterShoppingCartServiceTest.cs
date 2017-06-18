@@ -10,22 +10,24 @@ namespace HarryPotterShoppingCartTest
     [TestFixture]
     public class HarryPotterShoppingCartServiceTest
     {
+        private HarryPotterShoppingCartService _target;
+
+        [OneTimeSetUp]
+        public void SetUpFixtrue()
+        {
+            _target = new HarryPotterShoppingCartService();
+        }
+
         [Test]
         public void CheckOutTest_只買了第一集1本_結帳價格應為100()
         {
             //arrange
-            var target = new HarryPotterShoppingCartService();
             List<FantasyNovel> shoppingList = new List<FantasyNovel> {
-                new FantasyNovel
-                {
-                    Id =1,
-                    Name="HarryPotterBook1",
-                    UnitPrice=100
-                }
+                GetNovel(1)
             };
             var expected = 100;
             //act
-            var result = target.CheckOut(shoppingList);
+            var result = _target.CheckOut(shoppingList);
 
             //assert
             result.Should().Be(expected);
@@ -35,27 +37,24 @@ namespace HarryPotterShoppingCartTest
         public void CheckOutTest_只買了第一集第二集各1本_結帳價格應為190()
         {
             //arrange
-            var target = new HarryPotterShoppingCartService();
             List<FantasyNovel> shoppingList = new List<FantasyNovel> {
-                new FantasyNovel
-                {
-                    Id =1,
-                    Name="HarryPotterBook1",
-                    UnitPrice=100
-                },
-                new FantasyNovel
-                {
-                    Id =2,
-                    Name="HarryPotterBook2",
-                    UnitPrice=100
-                }
+               GetNovel(1),GetNovel(2)
             };
             var expected = 190;
             //act
-            var result = target.CheckOut(shoppingList);
+            var result = _target.CheckOut(shoppingList);
 
             //assert
             result.Should().Be(expected);
+        }
+        private FantasyNovel GetNovel(int id)
+        {
+            return new FantasyNovel
+            {
+                Id = id,
+                Name = $"HarryPotterBook{id}",
+                UnitPrice = 100
+            };
         }
     }
 }
