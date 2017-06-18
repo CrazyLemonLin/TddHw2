@@ -22,11 +22,18 @@ namespace HarryPotterShoppingCart
         }
         public decimal CheckOut(List<FantasyNovel> shoppingList)
         {
-            var total = shoppingList.Sum(s => s.UnitPrice);
+            var shoppingListCopy = shoppingList.Select(s => s).ToList();
+            var total = 0m;
+            while (shoppingListCopy.Any())
+            {
+                var distinctShoppingList = shoppingListCopy.GroupBy(s => s.Id).Select(g => g.First());
+                var distinctCount = distinctShoppingList.Count();
+                var distinctTotal = distinctShoppingList.Sum(d => d.UnitPrice);
+                total += CheckOutImpl(distinctTotal, distinctCount);
+                shoppingListCopy.RemoveAll(sc => distinctShoppingList.Contains(sc));
+            }
 
-            var count = shoppingList.Distinct().Count();
-
-            return CheckOutImpl(total, count);
+            return total;
         }
 
         private decimal CheckOutImpl(int total, int count)
