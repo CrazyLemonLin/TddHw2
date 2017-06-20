@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HarryPotterShoppingCart
@@ -31,7 +32,7 @@ namespace HarryPotterShoppingCart
             while (shoppingListCopy.Any())
             {
                 //群組後取第一個
-                var distinctShoppingList = shoppingListCopy.GroupBy(s => s.Id).Select(g => g.First());
+                var distinctShoppingList = shoppingListCopy.Distinct(s => s.Id).ToList();
                 var distinctCount = distinctShoppingList.Count();
                 var distinctTotal = distinctShoppingList.Sum(d => d.UnitPrice);
 
@@ -50,6 +51,22 @@ namespace HarryPotterShoppingCart
             _discountRules.TryGetValue(count, out discountRate);
 
             return total * discountRate;
+        }
+    }
+
+    public static class EnumerableExtenstions
+    {
+        public static IEnumerable<T> Distinct<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
+        {
+            var keys = new HashSet<TKey>();
+            foreach (var element in source)
+            {
+                var elementValue = keySelector(element);
+                if (keys.Add(elementValue))
+                {
+                    yield return element;
+                }
+            }
         }
     }
 }
